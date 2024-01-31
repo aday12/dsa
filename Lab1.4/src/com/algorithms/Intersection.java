@@ -1,9 +1,6 @@
 package com.algorithms;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 public class Intersection {
 
@@ -28,20 +25,26 @@ public class Intersection {
     }
 
     public Set<Integer> intersectionFast(int[] a, int[] b) {
-        // Implement fast intersection logic here
         Set<Integer> result = new HashSet<>();
 
-        Set<Integer> setA = new HashSet<>();
-        for (int num : a) {
-            setA.add(num);
-        }
+        Arrays.sort(a);
+        Arrays.sort(b);
 
-        for (int num : b) {
-            if (setA.contains(num)) {
-                result.add(num);
+        for (int indexA = 0, indexB = 0; indexA < a.length && indexB < b.length; ) {
+
+            int valueA = a[indexA];
+            int valueB = b[indexB];
+
+            if (valueA == valueB) {
+                result.add(valueA);
+                indexA++;
+                indexB++;
+            } else if (valueA < valueB) {
+                indexA++;
+            } else {
+                indexB++;
             }
         }
-
         return result;
     }
 
