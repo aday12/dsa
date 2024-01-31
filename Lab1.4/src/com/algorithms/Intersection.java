@@ -28,8 +28,21 @@ public class Intersection {
     }
 
     public Set<Integer> intersectionFast(int[] a, int[] b) {
-        // TODO-Lab1.4: Implement fast intersection logic here
-        return null;
+        // Implement fast intersection logic here
+        Set<Integer> result = new HashSet<>();
+
+        Set<Integer> setA = new HashSet<>();
+        for (int num : a) {
+            setA.add(num);
+        }
+
+        for (int num : b) {
+            if (setA.contains(num)) {
+                result.add(num);
+            }
+        }
+
+        return result;
     }
 
 }
