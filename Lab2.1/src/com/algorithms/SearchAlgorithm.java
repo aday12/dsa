@@ -1,17 +1,42 @@
 package com.algorithms;
 
+import java.util.Arrays;
+
 public class SearchAlgorithm {
 
     public static int linearSearch(int needle, int[] haystack) {
-        // TODO-Lab2.1.A: Implement Linear search logic.
-        return -1;
+        // Implement Linear search logic.
+        Arrays.sort(haystack);
+        int result = 0;
+
+        for (int i = 0; i < haystack.length; i++) {
+            if (haystack[i] == needle) {
+                result = haystack[i - 1];
+            } else {
+                i++;
+            }
+        }
+        return result;
     }
 
     public static int binarySearch(int needle, int[] haystack) {
-        // TODO-Lab2.1.B: Implement binary search logic here
+        // Implement binary search logic here
         //  using iteration; include counter variable and print
         //  statements to show number of iterations.
-        return -1;
+        int low = 0;
+        int high = haystack.length;
+
+        while (low < high) {
+            int mid = (low + high) / 2;
+            if (haystack[mid] < needle) {
+                low++;
+            } else if (haystack[mid] > needle) {
+                high--;
+            } else {
+                return mid;
+            }
+        }
+        return (low +1);
     }
 
     // TODO-Lab2.1.C (optional): Modify binarySearch logic to use
