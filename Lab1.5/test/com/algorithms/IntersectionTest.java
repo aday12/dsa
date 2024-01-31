@@ -5,6 +5,7 @@ import static org.junit.Assert.fail;
 
 import java.util.Set;
 import java.util.function.BiFunction;
+
 import org.junit.Before;
 import org.junit.Test;
 
@@ -83,7 +84,7 @@ public class IntersectionTest {
     //  duplicated code.
 
     private void testForSymmetricSuccess(int[] a, int[] b, Set<Integer> expected,
-            BiFunction<int[], int[], Set<Integer>> invocation) {
+                                         BiFunction<int[], int[], Set<Integer>> invocation) {
         assertEquals(expected, invocation.apply(a, b));
         assertEquals(expected, invocation.apply(b, a));
     }

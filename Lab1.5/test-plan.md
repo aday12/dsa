@@ -9,10 +9,12 @@
     public Set<Integer> intersectionFast(int[]a, int[]b)
     ```
 
-    **Important**: Expected return value is same for both methods, and for invocation with arguments reversed. That is, `intersection(a, b)`, `intersection(b, a)`, `intersectionFast(a, b)`, and `intersectionFast(b, a)` must all return equal sets for any given (and non-`null`) `a` and `b`. (A helper method can be used to reduce boilerplate.)
+  **Important**: Expected return value is same for both methods, and for invocation with arguments reversed. That
+  is, `intersection(a, b)`, `intersection(b, a)`, `intersectionFast(a, b)`, and `intersectionFast(b, a)` must all return
+  equal sets for any given (and non-`null`) `a` and `b`. (A helper method can be used to reduce boilerplate.)
 
 * Success paths:
-    * Non-empty intersection: 
+    * Non-empty intersection:
         * `a = {66, 24, 75, 22, 12, 87}`
         * `b = {32, 41, 98, 66, 39, 24}`
         * Expected intersection = `[24, 66]` (order not significant)
@@ -28,6 +30,6 @@
         * `a = {2, 4, 1, 3, 5}`
         * `b = {7, 6, 9, 0, 8}`
         * Expected intersection = `[]` (empty set)
-  
+
 * Failure paths:
     * One or the other (or both) of the array references is `null`; should throw `NullPointerException`.
