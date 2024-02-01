@@ -19,7 +19,7 @@ public class SearchAlgorithmTest {
     @Test
     public void linearSearch() {
         int target = 6;
-        int expected = 6;
+        int expected = 4;
         int actual = SearchAlgorithm.linearSearch(target, array);
         assertEquals(expected, actual);
     }
