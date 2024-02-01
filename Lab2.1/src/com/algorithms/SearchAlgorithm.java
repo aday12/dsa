@@ -8,6 +8,7 @@ public class SearchAlgorithm {
         // Implement Linear search logic.
         Arrays.sort(haystack);
         int result = 0;
+        int count = 0;
 
         for (int i = 0; i < haystack.length; i++) {
             if (haystack[i] == needle) {
@@ -26,18 +27,20 @@ public class SearchAlgorithm {
         Arrays.sort(haystack);
         int low = 0;
         int high = haystack.length - 1;
+        int count = 0;
 
-        while (low < high) {
+        while (low <= high) {
             int mid = (low + high) / 2;
+
             if (haystack[mid] < needle) {
                 low = mid + 1;
             } else if (haystack[mid] > needle) {
-                high = mid -1;
-            } else {
+                high = mid - 1;
+            } else if (haystack[mid] == needle) {
                 return mid;
             }
         }
-        return -(low + 1);
+        return -1;
     }
 
     // Modify binarySearch logic to use
@@ -47,30 +50,37 @@ public class SearchAlgorithm {
     //  the number of iterations/invocations.
     private static int binarySearch(int needle, int[] haystack, int low, int high) {
         // Implement binary search logic here using recursion.
-        Arrays.sort(haystack);
-        int left = 0;
-        int right = haystack.length - 1;
-        int mid = (left + right) / 2;
+        int mid = (low + high) / 2;
+
+        if (low > high) {
+            return -1;
+        }
 
         if (haystack[mid] == needle) {
-            return haystack[mid];
+            return mid;
         } else if (haystack[mid] > needle) {
-            right = mid - 1;
-            return binarySearch(needle, haystack, low, right);
-        } else if (needle > haystack[mid]) {
-            left = mid + 1;
-            return binarySearch(needle, haystack, low, high);
+            return binarySearch(needle, haystack, low, mid - 1);
+        } else {
+            return binarySearch(needle, haystack, mid + 1, high);
         }
-        return -1;
     }
 
     public static void main(String[] args) {
-        // TODO-Lab2.1.A: Invoke linearSearch(int, int[]) method
+        int[] array = {1, 4, 6, 8, 9, 10, 12, 13, 23, 44};
+        // Invoke linearSearch(int, int[]) method
         //  (and print the result) twice: once with a value actually
         //  present in the array, and once with a value not in the array.
-        // TODO-Lab2.1.B: Invoke binarySearch(int, int[]) method
+        System.out.println("Linear: Expected = 0 (needle not present), Actual: " + linearSearch(16, array));
+        System.out.println("Linear: Expected = 4, Actual: " + linearSearch(6, array));
+        // Invoke binarySearch(int, int[]) method
         //  (and print the result) twice: once with a value actually
         //  present in the array, and once with a value not in the array.
+        // This line returns the place in the array that contains the needle, not the iterations required to find it
+        System.out.println("Binary: Expected = 7, Actual: " + binarySearch(13, array));
+        System.out.println("Binary: Expected = -1 (needle not present), Actual: " + binarySearch(2, array));
+        // recursive binary tests
+        System.out.println("Binary recursive Expected: 2, Actual: " + binarySearch(6, array, 0, array.length - 1));
+        System.out.println("Binary recursive Expected: -1 (needle not present), Actual: " + binarySearch(45, array, 0, array.length - 1));
     }
 
 }
