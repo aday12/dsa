@@ -1,5 +1,7 @@
 package com.algorithms;
 
+import java.util.Optional;
+
 public class Queue<V> {
 
     // DblLinkedListNode is provided
@@ -43,14 +45,25 @@ public class Queue<V> {
     }
 
     public void enqueue(V item) {
+        DblLinkedListNode<V> newNode = new DblLinkedListNode<>(item, null, null);
         // TODO Lab 3.2.a: Create pseudocode for operation.
         // TODO Lab 3.2.b: Implement based on pseudocode.
+        if (tail == null) {
+            head = newNode;
+            tail = newNode;
+        }
+
+        tail.setNext(newNode);
+        newNode.setPrevious(tail);
+        tail = newNode;
     }
 
-    public V dequeue() {
-        // TODO Lab 3.2.a: Create pseudocode for operation.
-        // TODO Lab 3.2.b: Implement based on pseudocode.
-        return null;
+    public Optional<V> dequeue() {
+        Optional<DblLinkedListNode<V>> node = Optional.ofNullable(head);
+        head = node.flatMap(DblLinkedListNode::getNext).orElse(null);
+        Optional.ofNullable(head).ifPresent(n -> n.setPrevious(null));
+        if (head == null) tail = null;
+        return node.map(DblLinkedListNode::getValue);
     }
 
 }

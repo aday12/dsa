@@ -43,32 +43,47 @@ public class ChainedHashTable<K, V> implements HashTable<K, V> {
     }
 
     public void put(K key, V value) {
-        // TODO-Lab4.1: Implement the logic below
+        // Implement the logic below
         // 1. get the int hash code by calling the hashKey( )
         //    method of the hashProvider, passing to
         //    passing to it the key argument and the length of the array
         //    because this is a remainder hash, this method will return a number
         //    between 0 and the length of the array
+        int hashKey = hashProvider.hashKey(key, array.length);
         // 2. then use this value to find the appropriate
         //    element of the array and add a new Pair (key, value)
         //    to the beginning of the LinkedList
+        LinkedList<Pair<K, V>> linkedList = array[hashKey];
+        linkedList.addFirst(new Pair<>(key,value));
     }
 
     public V get(K key) {
-        // TODO-Lab4.1: Implement the logic below
+        // Implement the logic below
         // 1. If the key is null, return null
+        if (key == null) {
+            return null;
+        }
         // 2. Get the int hash value by calling the hashKey( )
         //    method of the hashProvider, passing
         //    to it the key argument and the length of the array.
         //    Because this is a remainder hash,
         //    this method will return a number between 0
         //    and the length of the array.
+        int hashKey = hashProvider.hashKey(key, array.length);
         // 3. Get a linked list of Pair<K, V> using the
         //    hashValue as the index off the array.
+        LinkedList<Pair<K, V>> linkedList = array[hashKey];
         // 4. For each Pair<K, V> from the list:
         //    a. Get the key k from the Pair.
         //    b. If k is equal to the value of the key parameter,
         //       return the value v from the Pair.
+        for (int i = 0; i < linkedList.size(); i++) {
+            Pair<K, V> pair = linkedList.get(i);
+            K pairKey = pair.getKey();
+            if (key.equals(pairKey)) {
+                return pair.getValue();
+            }
+        }
         // 5. if not found, return null.
         return null;
     }
